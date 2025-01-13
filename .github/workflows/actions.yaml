@@ -12,13 +12,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js v22
-        uses: actions/setup-node@v4
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
         with:
           node-version: 22
-          cache: npm
-      - run: npm run build
+
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+
+      - name: Build project
+        run: npm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
