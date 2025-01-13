@@ -17,7 +17,7 @@ function App() {
     const [showMenu, setShowMenu] = useState(true)
 
     return <QueryClientProvider client={queryClient}>
-        <Router>
+        <Router basename={import.meta.env.BASE_URL}>
             <Routes>
                 <Route path="/" element={<LoginPage/>}/>
                 <Route path="/login" element={<LoginPage/>}/>
