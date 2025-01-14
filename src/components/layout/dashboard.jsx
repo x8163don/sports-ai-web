@@ -38,9 +38,9 @@ export default function Dashboard({children, onHamburgerClick}) {
             </Button>
 
             <div className="flex-1">
-                <Button tag="a" className="text-xl normal-case" color="ghost">
-                    Logo
-                </Button>
+                {/*<Button tag="a" className="text-xl normal-case" color="ghost">*/}
+                {/*    Logo*/}
+                {/*</Button>*/}
             </div>
             <div className="flex-none">
                 <Dropdown end>

@@ -42,9 +42,6 @@ export default function LoginPage() {
 
         <div className="card card-bordered w-full max-w-md p-8 shadow-lg rounded-lg">
             <div className="mb-8 flex justify-center">
-                <div className="w-24 h-24 rounded">
-                    <img alt="logo" className="w-full h-full" src="/logo.png"/>
-                </div>
             </div>
             <div className="flex justify-center">
                 <div id="g-login"/>
