@@ -45,8 +45,9 @@ export default function PostsPage() {
     return (
         <div className="h-full flex flex-col p-6 gap-2">
             <div className="flex flex-row gap-2">
-                <Button bordered="true" className="cursor-pointer"
-                        onClick={handleNewPost}>
+                <Button
+                    color="primary"
+                    onClick={handleNewPost}>
                     <PlusIcon className="w-5 h-5"/>
                     New Post
                 </Button>

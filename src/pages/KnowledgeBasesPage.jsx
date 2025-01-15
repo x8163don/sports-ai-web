@@ -4,6 +4,8 @@ import {createKnowledgeBase, deleteKnowledgeBase, listKnowledgeBases} from "../a
 import {useNavigate} from "react-router-dom";
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {CacheKeyFn, queryClient} from "../api/base.js";
+import DoubleConfirmButton from "../components/DoubleConfirmButton.jsx";
+import {PlusIcon} from "@heroicons/react/24/outline/index.js";
 
 export default function KnowledgeBasesPage() {
 
@@ -64,22 +66,39 @@ export default function KnowledgeBasesPage() {
     return <div className="h-full flex flex-col">
         <div className="h-full flex flex-col p-6 gap-2">
             <div className="flex flex-row gap-2">
-                <Button onClick={() => setIsModalOpen(true)}>New</Button>
-            </div>
+                <Button color="primary" onClick={() => setIsModalOpen(true)}>
+                    <PlusIcon className="w-5 h-5"/>
+                    New
+                </Button>
 
+            </div>
             {
                 knowledgeBases?.knowledge_bases.map(kb => {
-                        return <Card key={kb.id}>
-                            <Card.Body onClick={() => {
-                                navigate(`/dashboard/knowledge-base/${kb.id}`)
-                            }}>
-                                <Card.Title className="flex flex-row justify-between">{kb.name}
+                        return <Card key={kb.id}
+                                     className="bg-base-100 w-96 shadow-xl"
+                        >
+                            <Card.Body >
+                                <Card.Title className="">{kb.name}</Card.Title>
+                                <p>{kb.description}</p>
+
+                                <Card.Actions className="justify-end">
+                                    <DoubleConfirmButton
+                                        text="Delete"
+                                        color="error"
+                                        confirmColor="error"
+                                        disabled={isDeletePending}
+                                        onConfirmClick={() => {
+                                            handleDeleteKnowledgeBase(kb.id)
+                                        }}
+                                    >Delete</DoubleConfirmButton>
+
                                     <Button
                                         disabled={isDeletePending}
-                                        onClick={() => handleDeleteKnowledgeBase(kb.id)}
-                                    >Delete</Button>
-                                </Card.Title>
-                                {kb.description}
+                                        onClick={() => {
+                                            navigate(`/dashboard/knowledge-base/${kb.id}`)
+                                        }}
+                                    >View</Button>
+                                </Card.Actions>
                             </Card.Body>
                         </Card>
                     }
@@ -106,11 +125,9 @@ export default function KnowledgeBasesPage() {
                     newKnowledgeBaseName.current.value = ""
                     newKnowledgeBaseDesc.current.value = ""
                 }}>Close</Button>
-                <Button onClick={handleNewKnowledgeBase}>Save</Button>
+                <Button color="primary" onClick={handleNewKnowledgeBase}>Save</Button>
             </Modal.Actions>
         </Modal>
-
-
     </div>
 }
 
